@@ -7,7 +7,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
-import javax.persistence.Transient;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -16,25 +15,22 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-//@ToString(exclude = "token")
+//@ToString(exclude = "user")
 @Entity
-public class User {
-
+public class Token {
+	
+	private String token;
 	@Id
-	private String email;
-	private String name;
-	private String birth;
-	private String password;
-	@Transient
-	private String passwordCheck;
-	private String gender;
+	private String userEmail;
 	private LocalDateTime createdAt;
 
 	@PrePersist
 	public void createdAt() {
 		this.createdAt = LocalDateTime.now();
 	}
-
-/*	@OneToOne(mappedBy = "user")
-	private Token token;*/
+	
+/*	@OneToOne
+	@JoinColumn(name = "user_email")
+	private User user;*/
+	
 }
