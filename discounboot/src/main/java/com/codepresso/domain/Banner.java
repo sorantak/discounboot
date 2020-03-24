@@ -16,12 +16,13 @@ import lombok.ToString;
 @ToString
 @Entity
 public class Banner {
-	
-	@Id @GeneratedValue
+
+	@Id
+	@GeneratedValue
 	private Long id;
 	private String content;
 	private LocalDateTime createdAt;
-	
+
 	@PrePersist
 	public void createdAt() {
 		this.createdAt = LocalDateTime.now();

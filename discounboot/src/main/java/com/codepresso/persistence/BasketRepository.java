@@ -20,4 +20,6 @@ public interface BasketRepository extends CrudRepository<Basket, Long> {
 
 	public List<Basket> findAllByUserEmail(String userEmail);
 
+	public Basket findByUserEmail(String email);
+
 }

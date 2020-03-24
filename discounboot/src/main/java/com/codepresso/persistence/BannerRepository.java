@@ -10,7 +10,7 @@ import com.codepresso.domain.Banner;
 
 @Repository
 public interface BannerRepository extends CrudRepository<Banner, Long> {
-	
+
 	List<Banner> findAll(Pageable paging);
 
 }

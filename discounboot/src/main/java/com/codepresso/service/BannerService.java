@@ -15,19 +15,19 @@ import com.codepresso.persistence.BannerRepository;
 
 @Service
 public class BannerService {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(BannerService.class);
 
 	@Autowired
 	BannerRepository bannerRepo;
-	
-	public List<Banner> findAll() {
-		logger.info("call findAll()");
-		
+
+	public List<Banner> findFive() {
+		logger.info("call findFive()");
+
 		Pageable paging = PageRequest.of(0, 5, Sort.Direction.ASC, "id");
 		List<Banner> bannerList = bannerRepo.findAll(paging);
-		
+
 		return bannerList;
 	}
-	
+
 }

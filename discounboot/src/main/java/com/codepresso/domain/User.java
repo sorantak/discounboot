@@ -4,8 +4,6 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Transient;
 
@@ -35,6 +33,7 @@ public class User {
 		this.createdAt = LocalDateTime.now();
 	}
 
-/*	@OneToOne(mappedBy = "user")
-	private Token token;*/
+	/*
+	 * @OneToOne(mappedBy = "user") private Token token;
+	 */
 }

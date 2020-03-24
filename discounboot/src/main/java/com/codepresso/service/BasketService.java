@@ -19,33 +19,33 @@ import com.codepresso.persistence.TokenRepository;
 public class BasketService {
 
 	private static final Logger logger = LoggerFactory.getLogger(BasketService.class);
-	
+
 	@Autowired
 	TokenRepository tokenRepo;
-	
+
 	@Autowired
 	BasketRepository basketRepo;
-	
+
 	@Autowired
 	ProdRepository prodRepo;
-	
+
 	public Basket addProd(String accesstoken, Long prodNo) {
 		logger.info("call addProd()");
-		
+
 		Token token = tokenRepo.findByToken(accesstoken);
 		String userEmail = token.getUserEmail();
-		
+
 		Basket basket = new Basket();
 		basket.setUserEmail(userEmail);
 		basket.setProdNo(prodNo);
-		
+
 		basketRepo.save(basket);
 		Basket result = basketRepo.findByUserEmailAndProdNo(userEmail, prodNo);
-		
+
 		Prod prod = prodRepo.findByNo(prodNo);
 		prod.setInBasket(true);
 		result.setProd(prod);
-		
+
 		return result;
 	}
 
@@ -54,12 +54,12 @@ public class BasketService {
 
 		Token token = tokenRepo.findByToken(accesstoken);
 		String userEmail = token.getUserEmail();
-		
+
 		Basket basket = new Basket();
 		basket.setUserEmail(userEmail);
 		basket.setProdNo(prodNo);
 		basketRepo.deleteAllByUserEmailAndProdNo(userEmail, prodNo);
-		
+
 		return null;
 	}
 
@@ -72,13 +72,13 @@ public class BasketService {
 		Basket[] basketList = new Basket[basket.size()];
 		for (int i = 0; i < basketList.length; i++) {
 			Basket basketInfo = new Basket();
-			
+
 			Long no = basket.get(i).getProdNo();
 			Prod prodInfo = new Prod();
 			prodInfo = prodRepo.findByNo(no);
 			prodInfo.setInBasket(true);
 			basketInfo.setProd(prodInfo);
-			
+
 			basketInfo.setUserEmail(userEmail);
 			LocalDateTime createdAt = basket.get(i).getCreatedAt();
 			basketInfo.setCreatedAt(createdAt);
@@ -86,7 +86,7 @@ public class BasketService {
 			basketInfo.setId(id);
 			Long prodNo = basket.get(i).getProdNo();
 			basketInfo.setProdNo(prodNo);
-			
+
 			basketList[i] = basketInfo;
 		}
 		return basketList;

@@ -22,12 +22,6 @@ public class UserService {
 	@Autowired
 	TokenRepository tokenRepo;
 	
-/*	public List<User> findByEmail(String email) {
-		logger.info("call findByEmail()");
-		
-		return userRepo.findByEmail(email);
-	}*/
-	
 	public int checkEmail(User user) {
 		logger.info("call checkEmail()");
 		

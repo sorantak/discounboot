@@ -8,7 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import com.codepresso.domain.User;
+import com.codepresso.domain.ProdDetail;
+import com.codepresso.persistence.ProdDetailRepository;
 import com.codepresso.persistence.UserRepository;
 
 @RunWith(SpringRunner.class)
@@ -18,13 +19,24 @@ class DiscounbootApplicationTests {
 	@Autowired
 	private UserRepository userRepo;
 	
-/*	@Test
+	@Autowired
+	private ProdDetailRepository detailRepo;
+	
+	@Test
 	public void testFindByEmail() {
-		List<User> userList = userRepo.findByEmail("user01@gmail.com");
+		int userList = userRepo.countByEmail("user01@gmail.com");
 		
 		System.out.println("검색 결과");
-		for (User user : userList) {
-			System.out.println("---> " + user.toString());
+		System.out.println("---> " + userList);
+	}
+	
+	@Test
+	public void test(Long prodNo) {
+		Long i = (long) 1;
+		List<ProdDetail> detailList = detailRepo.findIdAndContentAndImageUrlAndCreatedAtAndProdNoByProdNo(i);
+		System.out.println("검색결과");
+		for (ProdDetail detail : detailList) {
+			System.out.println("짠: " + detail.toString());
 		}
-	}*/
+	}
 }

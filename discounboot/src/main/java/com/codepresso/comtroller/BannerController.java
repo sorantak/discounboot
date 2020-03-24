@@ -19,20 +19,20 @@ import com.codepresso.service.BannerService;
 public class BannerController {
 
 	private static final Logger logger = LoggerFactory.getLogger(BannerController.class);
-	
+
 	@Autowired
 	BannerService bannerService;
-	
+
 	@GetMapping("")
-	public ResponseVO findAll() throws Exception{
-		logger.info("call findAll()");
-		
-		List<Banner> bannerResult = bannerService.findAll();
+	public ResponseVO findFive() throws Exception {
+		logger.info("call findFive()");
+
+		List<Banner> bannerResult = bannerService.findFive();
 		ResponseVO result = new ResponseVO();
 		result.setCode(HttpStatus.OK);
 		result.setMessage("SUCCESS");
 		result.setData(bannerResult);
 		return result;
 	}
-	
+
 }

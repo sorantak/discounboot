@@ -9,7 +9,7 @@ import com.codepresso.domain.Token;
 public interface TokenRepository extends CrudRepository<Token, String> {
 
 	public int countByUserEmail(String email);
-	
+
 	public Token findByToken(String tokenToString);
 
 	public Token findByUserEmail(String userEmail);
