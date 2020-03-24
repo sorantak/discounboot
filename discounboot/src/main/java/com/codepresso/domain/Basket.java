@@ -1,12 +1,11 @@
 package com.codepresso.domain;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.PrePersist;
 import javax.persistence.Transient;
 
 import lombok.Getter;
@@ -20,11 +19,17 @@ import lombok.ToString;
 public class Basket {
 
 	@Id @GeneratedValue
+	private Long id;
 	private String userEmail;
 	private Long prodNo;
-	@Temporal(value = TemporalType.TIMESTAMP)
-	private Date createdAt;
+	private LocalDateTime createdAt;
 	// 연관관계로 추후 수정
 	@Transient
 	private Prod prod;
+	
+	@PrePersist
+	public void createdAt() {
+		this.createdAt = LocalDateTime.now();
+	}
+
 }

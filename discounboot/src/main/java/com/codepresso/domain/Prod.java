@@ -19,7 +19,8 @@ import lombok.ToString;
 @Entity
 public class Prod {
 
-	@Id @GeneratedValue
+	@Id
+	@GeneratedValue
 	private Long no;
 	private String name;
 	private String thumbnailUrl;
@@ -30,5 +31,5 @@ public class Prod {
 	private Date createdAt;
 	@Transient
 	private boolean inBasket;
-	
+
 }
