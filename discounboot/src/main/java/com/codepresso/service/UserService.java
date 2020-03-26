@@ -66,11 +66,13 @@ public class UserService {
 		String email = user.getEmail();
 		String password = user.getPassword();
 		
-		User userInfo = new User();
-		userInfo.setEmail(email);
-		userInfo.setPassword(password);
+		User userInfo1 = new User();
+		userInfo1.setEmail(email);
+		userInfo1.setPassword(password);
 		int isUser = userRepo.countByEmailAndPassword(email, password);
-		int isToken = tokenRepo.countByUserEmail(email);
+		User userInfo2 = userRepo.findByEmail(email);
+		Long userId = userInfo2.getId();
+		int isToken = tokenRepo.countByUserId(userId);
 		
 		// 회원이면서 새 로그인 시
 		if (isUser == 1 && isToken == 0) {
@@ -78,7 +80,8 @@ public class UserService {
 			String tokenToString = token.toString();
 			
 			Token tokenInfo = new Token();
-			tokenInfo.setUserEmail(email);
+//			User userInfo3 = userRepo.findByEmail(email);
+			tokenInfo.setUser(userInfo2);
 			tokenInfo.setToken(tokenToString);
 			tokenRepo.save(tokenInfo);
 			Token tokenResult = tokenRepo.findByToken(tokenToString);
@@ -86,7 +89,9 @@ public class UserService {
 		}
 		// 회원이면서 재 로그인 시
 		else if (isUser == 1 && isToken == 1) {
-			Token userWithToken = tokenRepo.findByUserEmail(email);
+			Token userWithToken = tokenRepo.findByUserId(userId);
+//			User userInfo3 = userRepo.findByEmail(email);
+			userWithToken.setUser(userInfo2);
 			return userWithToken;
 		}
 		// 회원정보 잘못 입력 시

@@ -46,4 +46,8 @@ public class Prod {
 
 	@OneToMany(mappedBy = "prod", fetch = FetchType.EAGER)
 	private List<ProdDetail> detailList = new ArrayList<ProdDetail>();
+	
+//	@OneToMany(mappedBy = "prod", fetch = FetchType.LAZY)
+//	private List<Basket> basketList = new ArrayList<Basket>();
+	
 }

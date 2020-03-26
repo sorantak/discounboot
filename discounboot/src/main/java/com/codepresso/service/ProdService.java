@@ -28,9 +28,6 @@ public class ProdService {
 	TokenRepository tokenRepo;
 
 	@Autowired
-	ProdDetailRepository detailRepo;
-
-	@Autowired
 	ProdRepository prodRepo;
 
 	@Autowired
@@ -44,7 +41,7 @@ public class ProdService {
 
 		for (int i = 0; i < prodList.size(); i++) {
 			Token token = tokenRepo.findByToken(accesstoken);
-			String email = token.getUserEmail();
+			String email = token.getUser().getEmail();
 			Long prodNo = prodList.get(i).getNo();
 			Basket basket = basketRepo.findByUserEmailAndProdNo(email, prodNo);
 			if (basket != null) {
@@ -56,29 +53,21 @@ public class ProdService {
 		return prodList;
 	}
 
-	/*
-	 * public List<ProdDetail> findProdWithDetailByUser(String accesstoken, Long no)
-	 * { logger.info("call findProdWithDetailByUser()");
-	 * 
-	 * // 이 메서드만으로도 join이 실행되도록 List<ProdDetail> detailList =
-	 * detailRepo.findAllByProdNo(no);
-	 * 
-	 * if (accesstoken != null) { boolean inBasket = true; // Prod prod =
-	 * prodRepo.findByNo(no); Prod prod = detailList.get(0).getProd();
-	 * prod.setInBasket(inBasket);
-	 * 
-	 * for (int i = 0; i < detailList.size(); i++) {
-	 * detailList.get(i).setProd(prod); } return detailList; } else { return
-	 * detailList; } }
-	 */
-
-	public Optional<Prod> findProdWithDetailByUser(String accesstoken, Long id) {
+	public Optional<Prod> findProdWithDetailByUser(String accesstoken, Long no) {
 		logger.info("call findProdWithDetailByUser()");
 
-		Optional<Prod> prodResult = prodRepo.findById(id);
-		// select문 두 개가 아닌 join문 하나가 실행되도록 처리 필요
-		// inBasket 처리 필요
-		return prodResult;
+		Optional<Prod> prodResult = prodRepo.findById(no);
+
+		Token token = tokenRepo.findByToken(accesstoken);
+		String email = token.getUser().getEmail();
+		Basket basket = basketRepo.findByUserEmailAndProdNo(email, no);
+		if (basket != null) {
+			boolean inBasket = true;
+			prodResult.get().setInBasket(inBasket);
+			return prodResult;
+		} else {
+			return prodResult;
+		}
 	}
 
 }

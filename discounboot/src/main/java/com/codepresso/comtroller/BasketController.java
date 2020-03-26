@@ -25,7 +25,7 @@ public class BasketController {
 	@Autowired
 	BasketService basketService;
 
-	@PostMapping("")
+/*	@PostMapping("")
 	public ResponseVO addPRod(@CookieValue(value = "accesstoken", required = false) String accesstoken,
 			@RequestParam Long prodNo) throws Exception {
 		logger.info("call addProd()");
@@ -64,6 +64,6 @@ public class BasketController {
 		result.setMessage("SUCCESS");
 		result.setData(basketResult);
 		return result;
-	}
+	}*/
 
 }

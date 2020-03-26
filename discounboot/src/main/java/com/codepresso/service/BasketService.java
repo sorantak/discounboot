@@ -29,7 +29,7 @@ public class BasketService {
 	@Autowired
 	ProdRepository prodRepo;
 
-	public Basket addProd(String accesstoken, Long prodNo) {
+/*	public Basket addProd(String accesstoken, Long prodNo) {
 		logger.info("call addProd()");
 
 		Token token = tokenRepo.findByToken(accesstoken);
@@ -90,6 +90,6 @@ public class BasketService {
 			basketList[i] = basketInfo;
 		}
 		return basketList;
-	}
+	}*/
 
 }
