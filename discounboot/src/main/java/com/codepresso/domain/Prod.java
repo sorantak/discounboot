@@ -15,13 +15,15 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
 @Getter
 @Setter
-@ToString(exclude = "detailList")
+@ToString(exclude = {"detailList", "basketList"})
 @Table(name = "prod")
 @Entity
 public class Prod {
@@ -48,7 +50,8 @@ public class Prod {
 	@OneToMany(mappedBy = "prod", fetch = FetchType.EAGER)
 	private List<ProdDetail> detailList = new ArrayList<ProdDetail>();
 	
-//	@OneToMany(mappedBy = "prod", fetch = FetchType.LAZY)
-//	private List<Basket> basketList = new ArrayList<Basket>();
+	@JsonIgnore
+	@OneToMany(mappedBy = "prod", fetch = FetchType.EAGER)
+	private List<Basket> basketList = new ArrayList<Basket>();
 	
 }

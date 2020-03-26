@@ -41,14 +41,14 @@ public class ProdController {
 
 	@GetMapping("/{id}")
 	public ResponseVO findProdWithDetailByUser(@CookieValue(value = "accesstoken", required = false) String accesstoken,
-			@PathVariable("id") Long no) throws Exception {
+			@PathVariable("id") Long id) throws Exception {
 		logger.info("call findProdWithDetailByUser()");
-		
-		Optional<Prod> prodResult = prodService.findProdWithDetailByUser(accesstoken, no);
+
+		Optional<Prod> prodResult = prodService.findProdWithDetailByUser(accesstoken, id);
 		ResponseVO result = new ResponseVO();
 		result.setCode(HttpStatus.OK);
 		result.setMessage("SUCCESS");
 		result.setData(prodResult);
 		return result;
-	}	
+	}
 }

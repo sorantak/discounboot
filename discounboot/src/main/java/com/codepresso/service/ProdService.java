@@ -40,43 +40,48 @@ public class ProdService {
 	public List<Prod> findSix(String accesstoken) {
 		logger.info("call findSix()");
 
-		Pageable paging = PageRequest.of(0, 6, Sort.Direction.ASC, "no");
-		List<Prod> prodList = prodRepo.findAll(paging);
-
-		for (int i = 0; i < prodList.size(); i++) {
+		Pageable paging = PageRequest.of(0, 6, Sort.Direction.ASC, "id");
+		List<Prod> prodResult = prodRepo.findAll(paging);
+/*
+		if (accesstoken != null) {
 			Token token = tokenRepo.findByToken(accesstoken);
-			String email = token.getUser().getEmail();
-			Long prodNo = prodList.get(i).getId();
-			Basket basket = basketRepo.findByUserEmailAndProdId(email, prodNo);
-			if (basket != null) {
-				prodList.get(i).setInBasket(true);
-			} else {
-				prodList.get(i).setInBasket(false);
+			Long userId = token.getUser().getId();
+			for (int i = 0; i < prodResult.size(); i++) {
+				Long prodId = prodResult.get(i).getId();
+				Basket basket = basketRepo.findByUserIdAndProdId(userId, prodId);
+				if (basket != null) {
+					boolean inBasket = true;
+					prodResult.get(i).setInBasket(inBasket);
+					return prodResult;
+				}
+				return prodResult;
 			}
-		}
-		return prodList;
+		}*/
+		return prodResult;
 	}
 
-	public Optional<Prod> findProdWithDetailByUser(String accesstoken, Long no) {
+	public Optional<Prod> findProdWithDetailByUser(String accesstoken, Long id) {
 		logger.info("call findProdWithDetailByUser()");
 
-		Optional<Prod> prodResult = prodRepo.findById(no);
+		Optional<Prod> prodResult = prodRepo.findById(id);
 
 		if (accesstoken != null) {
 			Token token = tokenRepo.findByToken(accesstoken);
-			String email = token.getUser().getEmail();
-			Basket basket = basketRepo.findByUserEmailAndProdId(email, no);
+			Long userId = token.getUser().getId();
+			Basket basket = basketRepo.findByUserIdAndProdId(userId, id);
 			if (basket != null) {
-				List<ProdDetail> detailInfo = detailRepo.findByProdId(no);
+				List<ProdDetail> detailInfo = detailRepo.findByProdId(id);
 				prodResult.get().setDetailList(detailInfo);
 				boolean inBasket = true;
 				prodResult.get().setInBasket(inBasket);
+				return prodResult;
 			}
-			List<ProdDetail> detailInfo = detailRepo.findByProdId(no);
+			List<ProdDetail> detailInfo = detailRepo.findByProdId(id);
 			prodResult.get().setDetailList(detailInfo);
 			return prodResult;
+
 		}
-		List<ProdDetail> detailInfo = detailRepo.findByProdId(no);
+		List<ProdDetail> detailInfo = detailRepo.findByProdId(id);
 		prodResult.get().setDetailList(detailInfo);
 		return prodResult;
 	}
