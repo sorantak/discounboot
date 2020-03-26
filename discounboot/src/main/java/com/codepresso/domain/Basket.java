@@ -30,7 +30,7 @@ public class Basket {
 	@GeneratedValue
 	private Long id;
 	private String userEmail;
-	private Long prodNo;
+	private Long prodId;
 	private LocalDateTime createdAt;
 //	@Transient
 //	private Prod prod;

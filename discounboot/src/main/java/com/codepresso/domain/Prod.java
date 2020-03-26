@@ -21,15 +21,15 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString
+@ToString(exclude = "detailList")
 @Table(name = "prod")
 @Entity
 public class Prod {
 
 	@Id
 	@GeneratedValue
-	@Column(name = "no")
-	private Long no;
+	@Column(name = "id")
+	private Long id;
 	private String name;
 	private String thumbnailUrl;
 	private Long originPrice;
@@ -44,6 +44,7 @@ public class Prod {
 		this.createdAt = LocalDateTime.now();
 	}
 
+	@Transient
 	@OneToMany(mappedBy = "prod", fetch = FetchType.EAGER)
 	private List<ProdDetail> detailList = new ArrayList<ProdDetail>();
 	

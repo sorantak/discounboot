@@ -11,8 +11,6 @@ import com.codepresso.domain.Prod;
 @Repository
 public interface ProdRepository extends CrudRepository<Prod, Long> {
 
-	Prod findByNo(Long no);
-
 	List<Prod> findAll(Pageable paging);
 
 //	Prod findAllByProdNo(Long no);

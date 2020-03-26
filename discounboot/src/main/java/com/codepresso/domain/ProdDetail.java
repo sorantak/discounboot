@@ -3,11 +3,13 @@ package com.codepresso.domain;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -17,15 +19,14 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@ToString
+@ToString(exclude = "prod")
 @Table(name = "prod_detail")
 @Entity
 public class ProdDetail {
 
 	@Id
+	@GeneratedValue
 	private Long id;
-//	@Column(name = "prod_no")
-//	private Long prodNo;
 	private String content;
 	private String imageUrl;
 	private LocalDateTime createdAt;
@@ -36,7 +37,7 @@ public class ProdDetail {
 	}
 
 	@ManyToOne
-	@JoinColumn(name = "prod_no", nullable = false, updatable = false)
+	@JoinColumn(name = "prod_id", nullable = false)
 	@JsonIgnore
 	private Prod prod;
 

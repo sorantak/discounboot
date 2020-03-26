@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.codepresso.domain.Basket;
 import com.codepresso.domain.Prod;
+import com.codepresso.domain.ProdDetail;
 import com.codepresso.domain.Token;
 import com.codepresso.persistence.BasketRepository;
 import com.codepresso.persistence.ProdDetailRepository;
@@ -33,6 +34,9 @@ public class ProdService {
 	@Autowired
 	BasketRepository basketRepo;
 
+	@Autowired
+	ProdDetailRepository detailRepo;
+
 	public List<Prod> findSix(String accesstoken) {
 		logger.info("call findSix()");
 
@@ -42,8 +46,8 @@ public class ProdService {
 		for (int i = 0; i < prodList.size(); i++) {
 			Token token = tokenRepo.findByToken(accesstoken);
 			String email = token.getUser().getEmail();
-			Long prodNo = prodList.get(i).getNo();
-			Basket basket = basketRepo.findByUserEmailAndProdNo(email, prodNo);
+			Long prodNo = prodList.get(i).getId();
+			Basket basket = basketRepo.findByUserEmailAndProdId(email, prodNo);
 			if (basket != null) {
 				prodList.get(i).setInBasket(true);
 			} else {
@@ -58,16 +62,23 @@ public class ProdService {
 
 		Optional<Prod> prodResult = prodRepo.findById(no);
 
-		Token token = tokenRepo.findByToken(accesstoken);
-		String email = token.getUser().getEmail();
-		Basket basket = basketRepo.findByUserEmailAndProdNo(email, no);
-		if (basket != null) {
-			boolean inBasket = true;
-			prodResult.get().setInBasket(inBasket);
-			return prodResult;
-		} else {
+		if (accesstoken != null) {
+			Token token = tokenRepo.findByToken(accesstoken);
+			String email = token.getUser().getEmail();
+			Basket basket = basketRepo.findByUserEmailAndProdId(email, no);
+			if (basket != null) {
+				List<ProdDetail> detailInfo = detailRepo.findByProdId(no);
+				prodResult.get().setDetailList(detailInfo);
+				boolean inBasket = true;
+				prodResult.get().setInBasket(inBasket);
+			}
+			List<ProdDetail> detailInfo = detailRepo.findByProdId(no);
+			prodResult.get().setDetailList(detailInfo);
 			return prodResult;
 		}
+		List<ProdDetail> detailInfo = detailRepo.findByProdId(no);
+		prodResult.get().setDetailList(detailInfo);
+		return prodResult;
 	}
 
 }
