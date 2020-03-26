@@ -58,7 +58,7 @@ public class BasketService {
 		Basket basket = new Basket();
 		basket.setUserEmail(userEmail);
 		basket.setProdNo(prodNo);
-		basketRepo.deleteAllByUserEmailAndProdNo(userEmail, prodNo);
+		basketRepo.deleteOneByUserEmailAndProdNo(userEmail, prodNo);
 
 		return null;
 	}

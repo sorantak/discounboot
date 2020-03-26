@@ -2,13 +2,18 @@ package com.codepresso.domain;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
+import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
 import lombok.ToString;
@@ -17,13 +22,14 @@ import lombok.Setter;
 @Getter
 @Setter
 @ToString
+@Table(name = "prod_detail")
 @Entity
 public class ProdDetail {
 
 	@Id
 	private Long id;
-	@Column(name = "prod_no")
-	private Long prodNo;
+//	@Column(name = "prod_no")
+//	private Long prodNo;
 	private String content;
 	private String imageUrl;
 	private LocalDateTime createdAt;
@@ -33,9 +39,17 @@ public class ProdDetail {
 		this.createdAt = LocalDateTime.now();
 	}
 
-	@Transient
 	@ManyToOne
-	@JoinColumn(name = "prod_no", nullable = false, insertable = false, updatable = false)
+	@JoinColumn(name = "prod_no", nullable = false, updatable = false)
+	@JsonIgnore
 	private Prod prod;
+
+	public void setProd(Prod prod) {
+		if (this.prod != null) {
+			this.prod.getDetailList().add(this);
+		}
+		this.prod = prod;
+		prod.getDetailList().add(this);
+	}
 
 }

@@ -1,6 +1,7 @@
 package com.codepresso.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import com.codepresso.domain.Basket;
 import com.codepresso.domain.Prod;
-import com.codepresso.domain.ProdDetail;
 import com.codepresso.domain.Token;
 import com.codepresso.persistence.BasketRepository;
 import com.codepresso.persistence.ProdDetailRepository;
@@ -56,22 +56,29 @@ public class ProdService {
 		return prodList;
 	}
 
-	public List<ProdDetail> findProdWithDetailByUser(String accesstoken, Long no) {
+	/*
+	 * public List<ProdDetail> findProdWithDetailByUser(String accesstoken, Long no)
+	 * { logger.info("call findProdWithDetailByUser()");
+	 * 
+	 * // 이 메서드만으로도 join이 실행되도록 List<ProdDetail> detailList =
+	 * detailRepo.findAllByProdNo(no);
+	 * 
+	 * if (accesstoken != null) { boolean inBasket = true; // Prod prod =
+	 * prodRepo.findByNo(no); Prod prod = detailList.get(0).getProd();
+	 * prod.setInBasket(inBasket);
+	 * 
+	 * for (int i = 0; i < detailList.size(); i++) {
+	 * detailList.get(i).setProd(prod); } return detailList; } else { return
+	 * detailList; } }
+	 */
+
+	public Optional<Prod> findProdWithDetailByUser(String accesstoken, Long id) {
 		logger.info("call findProdWithDetailByUser()");
 
-		List<ProdDetail> detailList = detailRepo.findIdAndContentAndImageUrlAndCreatedAtAndProdNoByProdNo(no);
-
-		if (accesstoken != null) {
-			boolean inBasket = true;
-			Prod prod = prodRepo.findByNo(no);
-			prod.setInBasket(inBasket);
-
-			for (int i = 0; i < detailList.size(); i++) {
-				detailList.get(i).setProd(prod);
-			}
-			return detailList;
-		} else {
-			return detailList;
-		}
+		Optional<Prod> prodResult = prodRepo.findById(id);
+		// select문 두 개가 아닌 join문 하나가 실행되도록 처리 필요
+		// inBasket 처리 필요
+		return prodResult;
 	}
+
 }

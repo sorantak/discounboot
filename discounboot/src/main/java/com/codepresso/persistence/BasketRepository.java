@@ -15,8 +15,9 @@ public interface BasketRepository extends CrudRepository<Basket, Long> {
 	public Basket findByUserEmailAndProdNo(String userEmail, Long prodNo);
 
 	// https://yoonho-devlog.tistory.com/61
-	@Transactional
-	public void deleteAllByUserEmailAndProdNo(String userEmail, Long prodNo);
+	// 숙제, repository 에 붙이는 것이 맞는 것인가
+//	@Transactional
+	public void deleteOneByUserEmailAndProdNo(String userEmail, Long prodNo);
 
 	public List<Basket> findAllByUserEmail(String userEmail);
 

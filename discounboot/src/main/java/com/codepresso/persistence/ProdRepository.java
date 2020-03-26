@@ -15,4 +15,6 @@ public interface ProdRepository extends CrudRepository<Prod, Long> {
 
 	List<Prod> findAll(Pageable paging);
 
+//	Prod findAllByProdNo(Long no);
+
 }
