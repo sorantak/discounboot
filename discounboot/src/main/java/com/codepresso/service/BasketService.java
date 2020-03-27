@@ -37,35 +37,22 @@ public class BasketService {
 
 	public Basket addProd(String accesstoken, Long prodId) {
 		logger.info("call addProd()");
-/*
+
 		Token token = tokenRepo.findByToken(accesstoken);
+		logger.info("token: " + token);
 		Long userId = token.getUser().getId();
+		logger.info("usreId: " + userId);
 		
-//		Basket basket = basketRepo.saveOne(userId, prodId);
-//		Basket basket = new Basket();
-//		User user = userRepo.findById(userId);
-//		basket.setUser(user);
-//		Optional<Prod> prod = prodRepo.findById(prodId);
-//		Prod prod2 = new Prod();
-//		Long prodId1 = prod.get().getId();
-//		prod2.setId(prodId1);
-//		String name = prod.get().getName();
-//		prod2.setName(name);
-//		String tUrl = prod.get().getThumbnailUrl();
-//		prod2.setThumbnailUrl(tUrl);
-//		Long oPrice = prod.get().getOriginPrice();
-//		prod2.setOriginPrice(oPrice);
-//		Long dPrice = prod.get().getDiscPrice();
-//		prod2.setDiscPrice(dPrice);
-//		LocalDateTime createdAt = prod.get().getCreatedAt();
-//		prod2.setCreatedAt(createdAt);
-//		basket.setProd(prod2);
+		Basket basket = new Basket();
+		logger.info("basket1 : " + basket);
+		basket.getUser().setId(userId);
+		logger.info("basket2 : " + basket);
 
-//		basketRepo.save(basket);
+		basket.getProd().setId(prodId);
+		basketRepo.save(basket);
 		Basket result = basketRepo.findByUserIdAndProdId(userId, prodId);
-		result.getProd().setInBasket(true);*/
-
-		return null;
+		result.getProd().setInBasket(true);
+		return result;
 	}
 
 	public Basket removeProd(String accesstoken, Long prodId) {

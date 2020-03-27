@@ -1,12 +1,14 @@
 package com.codepresso.persistence;
 
+import java.util.Optional;
+
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import com.codepresso.domain.User;
 
 @Repository
-public interface UserRepository extends CrudRepository<User, String> {
+public interface UserRepository extends CrudRepository<User, Long> {
 
 	public int countByEmail(String email);
 
@@ -14,6 +16,6 @@ public interface UserRepository extends CrudRepository<User, String> {
 
 	public User findByEmail(String email);
 
-	public User findById(Long Id);
+	public Optional<User> findById(Long Id);
 
 }

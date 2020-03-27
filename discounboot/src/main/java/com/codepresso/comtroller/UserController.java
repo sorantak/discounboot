@@ -28,11 +28,10 @@ public class UserController {
 		logger.info("call signUp()");
 
 		int emailResult = userService.checkEmail(user);
-//		boolean ageResult = userService.checkAge(user);
+		boolean ageResult = userService.checkAge(user);
 		boolean pwResult = userService.checkPw(user);
 
-		if (emailResult == 0 && pwResult == true) {
-//		if (emailResult == 0 && ageResult == true && pwResult == true) {
+		if (emailResult == 0 && ageResult == true && pwResult == true) {
 			User userResult = userService.signUp(user);
 			ResponseVO result = new ResponseVO();
 			result.setCode(HttpStatus.OK);

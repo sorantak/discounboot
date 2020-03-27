@@ -42,7 +42,7 @@ public class ProdService {
 
 		Pageable paging = PageRequest.of(0, 6, Sort.Direction.ASC, "id");
 		List<Prod> prodResult = prodRepo.findAll(paging);
-/*
+
 		if (accesstoken != null) {
 			Token token = tokenRepo.findByToken(accesstoken);
 			Long userId = token.getUser().getId();
@@ -56,7 +56,7 @@ public class ProdService {
 				}
 				return prodResult;
 			}
-		}*/
+		}
 		return prodResult;
 	}
 
@@ -64,6 +64,8 @@ public class ProdService {
 		logger.info("call findProdWithDetailByUser()");
 
 		Optional<Prod> prodResult = prodRepo.findById(id);
+		
+		// token 있을 시 문제 발생, 없으면 정상 작동
 		logger.info("accesstoken: " + accesstoken);
 		if (accesstoken != null) {
 			Token token = tokenRepo.findByToken(accesstoken);

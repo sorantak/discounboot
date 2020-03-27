@@ -1,5 +1,7 @@
 package com.codepresso.service;
 
+import java.util.Calendar;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,16 +32,20 @@ public class UserService {
 		return emailResult;
 	}
 
-/*	public boolean checkAge(User user) {
+	public boolean checkAge(User user) {
 		logger.info("call checkAge()");
 		
 		String birth = user.getBirth();
-		int age = userRepo.convertBirthToAge(birth);
-		if (age > 7) {
+		String birthYear = birth.substring(0, 4);
+		int birthYear2 = Integer.parseInt(birthYear);
+		int thisYear = Calendar.getInstance().get(Calendar.YEAR);
+		int userAge = thisYear - birthYear2;
+		logger.info("userAge: " + userAge);
+		if (userAge > 7) {
 			return true;
 		} else
 			return false;
-	}*/
+	}
 	
 	public boolean checkPw(User user) {
 		logger.info("call checkPw()");
@@ -83,14 +89,16 @@ public class UserService {
 //			User userInfo3 = userRepo.findByEmail(email);
 			tokenInfo.setUser(userInfo2);
 			tokenInfo.setToken(tokenToString);
+			logger.info("tokenInfo(새로 생성된 토큰): " + tokenInfo);
 			tokenRepo.save(tokenInfo);
+			logger.info("findByToken 실행");
 			Token tokenResult = tokenRepo.findByToken(tokenToString);
+			logger.info("findByToken 실행(토큰으로 사용자 조회): " + tokenResult);
 			return tokenResult;
 		}
 		// 회원이면서 재 로그인 시
 		else if (isUser == 1 && isToken == 1) {
 			Token userWithToken = tokenRepo.findByUserId(userId);
-//			User userInfo3 = userRepo.findByEmail(email);
 			userWithToken.setUser(userInfo2);
 			return userWithToken;
 		}
