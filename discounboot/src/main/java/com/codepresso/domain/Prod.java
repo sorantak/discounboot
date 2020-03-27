@@ -30,7 +30,6 @@ public class Prod {
 
 	@Id
 	@GeneratedValue
-	@Column(name = "id")
 	private Long id;
 	private String name;
 	private String thumbnailUrl;

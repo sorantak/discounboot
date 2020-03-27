@@ -17,10 +17,12 @@ public interface BasketRepository extends CrudRepository<Basket, Long> {
 	// https://yoonho-devlog.tistory.com/61
 	// 숙제, repository 에 붙이는 것이 맞는 것인가
 //	@Transactional
-	public void deleteOneByuserIdAndProdId(Long userId, Long prodId);
+	public void deleteOneByUserIdAndProdId(Long userId, Long prodId);
 
 	public List<Basket> findAllByuserId(Long userId);
 
 	public Basket findByuserId(Long userId);
+
+//	public Basket saveOne(Long prodId, Long userId);
 
 }

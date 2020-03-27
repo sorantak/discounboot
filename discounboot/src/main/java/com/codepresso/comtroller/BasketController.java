@@ -1,5 +1,7 @@
 package com.codepresso.comtroller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,12 +27,12 @@ public class BasketController {
 	@Autowired
 	BasketService basketService;
 
-/*	@PostMapping("")
+	@PostMapping("")
 	public ResponseVO addPRod(@CookieValue(value = "accesstoken", required = false) String accesstoken,
-			@RequestParam Long prodNo) throws Exception {
+			@RequestParam Long prodId) throws Exception {
 		logger.info("call addProd()");
 
-		Basket basketResult = basketService.addProd(accesstoken, prodNo);
+		Basket basketResult = basketService.addProd(accesstoken, prodId);
 		ResponseVO result = new ResponseVO();
 		result.setCode(HttpStatus.OK);
 		result.setMessage("SUCCESS");
@@ -41,11 +43,11 @@ public class BasketController {
 	// accesstoken 예외처리/ input parameter 관련된 것들은 controller에서 처리
 	@DeleteMapping("")
 	public ResponseVO removeProd(@CookieValue(value = "accesstoken") String accesstoken,
-			@RequestParam Long prodNo) throws Exception {
+			@RequestParam Long prodId) throws Exception {
 		logger.info("call removeProd()");
 		
 //		HttpStatus.BAD_REQUEST
-		Basket basketResult = basketService.removeProd(accesstoken, prodNo);
+		Basket basketResult = basketService.removeProd(accesstoken, prodId);
 		ResponseVO result = new ResponseVO();
 		result.setCode(HttpStatus.OK);
 		result.setMessage("SUCCESS");
@@ -58,12 +60,12 @@ public class BasketController {
 			throws Exception {
 		logger.info("call findAll()");
 
-		Basket[] basketResult = basketService.findAll(accesstoken);
+		List<Basket> basketResult = basketService.findAll(accesstoken);
 		ResponseVO result = new ResponseVO();
 		result.setCode(HttpStatus.OK);
 		result.setMessage("SUCCESS");
 		result.setData(basketResult);
 		return result;
-	}*/
+	}
 
 }

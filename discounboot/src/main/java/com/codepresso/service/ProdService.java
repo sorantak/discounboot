@@ -64,9 +64,10 @@ public class ProdService {
 		logger.info("call findProdWithDetailByUser()");
 
 		Optional<Prod> prodResult = prodRepo.findById(id);
-
+		logger.info("accesstoken: " + accesstoken);
 		if (accesstoken != null) {
 			Token token = tokenRepo.findByToken(accesstoken);
+			logger.info("token: " + token);
 			Long userId = token.getUser().getId();
 			Basket basket = basketRepo.findByUserIdAndProdId(userId, id);
 			if (basket != null) {
