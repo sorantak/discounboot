@@ -20,7 +20,7 @@ import lombok.ToString;
 @Table(name = "token")
 @Entity
 public class Token {
-	
+
 	@Id
 	@GeneratedValue
 	private Long id;

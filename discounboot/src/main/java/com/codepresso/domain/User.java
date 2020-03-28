@@ -47,9 +47,9 @@ public class User {
 	@Transient
 	@OneToOne(mappedBy = "user")
 	private Token token;
-	
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
 	private List<Basket> basketList = new ArrayList<Basket>();
-	
+
 }

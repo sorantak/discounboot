@@ -4,8 +4,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -23,7 +21,7 @@ import lombok.ToString;
 
 @Getter
 @Setter
-@ToString(exclude = {"detailList", "basketList"})
+@ToString(exclude = { "detailList", "basketList" })
 @Table(name = "prod")
 @Entity
 public class Prod {
@@ -48,9 +46,9 @@ public class Prod {
 	@Transient
 	@OneToMany(mappedBy = "prod", fetch = FetchType.EAGER)
 	private List<ProdDetail> detailList = new ArrayList<ProdDetail>();
-	
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "prod", fetch = FetchType.EAGER)
 	private List<Basket> basketList = new ArrayList<Basket>();
-	
+
 }

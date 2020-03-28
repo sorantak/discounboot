@@ -42,10 +42,10 @@ public class BasketController {
 
 	// accesstoken 예외처리/ input parameter 관련된 것들은 controller에서 처리
 	@DeleteMapping("")
-	public ResponseVO removeProd(@CookieValue(value = "accesstoken") String accesstoken,
-			@RequestParam Long prodId) throws Exception {
+	public ResponseVO removeProd(@CookieValue(value = "accesstoken") String accesstoken, @RequestParam Long prodId)
+			throws Exception {
 		logger.info("call removeProd()");
-		
+
 //		HttpStatus.BAD_REQUEST
 		Basket basketResult = basketService.removeProd(accesstoken, prodId);
 		ResponseVO result = new ResponseVO();

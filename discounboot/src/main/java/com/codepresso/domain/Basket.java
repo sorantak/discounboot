@@ -1,8 +1,6 @@
 package com.codepresso.domain;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,9 +10,6 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.PrePersist;
 import javax.persistence.Table;
-import javax.persistence.Transient;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -30,8 +25,6 @@ public class Basket {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-//	private String userId;
-//	private Long prodId;
 	private LocalDateTime createdAt;
 
 	@PrePersist

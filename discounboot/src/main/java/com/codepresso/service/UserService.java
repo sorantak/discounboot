@@ -20,13 +20,13 @@ public class UserService {
 
 	@Autowired
 	UserRepository userRepo;
-	
+
 	@Autowired
 	TokenRepository tokenRepo;
-	
+
 	public int checkEmail(User user) {
 		logger.info("call checkEmail()");
-		
+
 		String email = user.getEmail();
 		int emailResult = userRepo.countByEmail(email);
 		return emailResult;
@@ -34,7 +34,7 @@ public class UserService {
 
 	public boolean checkAge(User user) {
 		logger.info("call checkAge()");
-		
+
 		String birth = user.getBirth();
 		String birthYear = birth.substring(0, 4);
 		int birthYear2 = Integer.parseInt(birthYear);
@@ -46,20 +46,20 @@ public class UserService {
 		} else
 			return false;
 	}
-	
+
 	public boolean checkPw(User user) {
 		logger.info("call checkPw()");
-		
+
 		logger.info("user: " + user);
 		String password = user.getPassword();
 		String passwordCheck = user.getPasswordCheck();
-		
+
 		if (password.equals(passwordCheck)) {
 			return true;
 		} else
 			return false;
 	}
-	
+
 	public User signUp(User user) {
 		logger.info("call signUp()");
 		User userResult = userRepo.save(user);
@@ -68,10 +68,10 @@ public class UserService {
 
 	public Token signIn(User user) {
 		logger.info("call signIn()");
-		
+
 		String email = user.getEmail();
 		String password = user.getPassword();
-		
+
 		User userInfo1 = new User();
 		userInfo1.setEmail(email);
 		userInfo1.setPassword(password);
@@ -79,14 +79,13 @@ public class UserService {
 		User userInfo2 = userRepo.findByEmail(email);
 		Long userId = userInfo2.getId();
 		int isToken = tokenRepo.countByUserId(userId);
-		
+
 		// 회원이면서 새 로그인 시
 		if (isUser == 1 && isToken == 0) {
 			StringBuffer token = RandomToken.createToken();
 			String tokenToString = token.toString();
-			
+
 			Token tokenInfo = new Token();
-//			User userInfo3 = userRepo.findByEmail(email);
 			tokenInfo.setUser(userInfo2);
 			tokenInfo.setToken(tokenToString);
 			logger.info("tokenInfo(새로 생성된 토큰): " + tokenInfo);
