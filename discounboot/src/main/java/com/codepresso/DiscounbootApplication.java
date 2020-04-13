@@ -13,20 +13,14 @@ public class DiscounbootApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(DiscounbootApplication.class, args);
 	}
-	
+
 	@Configuration
-	public class WebConfig implements WebMvcConfigurer{
-		
+	public class WebConfig implements WebMvcConfigurer {
+
 		@Override
 		public void addCorsMappings(CorsRegistry registry) {
-			registry.addMapping("/**")
-				.allowedOrigins("http://localhost:8081","http://localhost:8080")
-				.allowedMethods(
-						HttpMethod.GET.name(),
-						HttpMethod.POST.name(),
-						HttpMethod.PUT.name(),
-						HttpMethod.DELETE.name()
-						);
+			registry.addMapping("/**").allowedOrigins("http://localhost:8081", "http://localhost:8080").allowedMethods(
+					HttpMethod.GET.name(), HttpMethod.POST.name(), HttpMethod.PUT.name(), HttpMethod.DELETE.name());
 		}
 	}
 
