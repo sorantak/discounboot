@@ -51,4 +51,16 @@ public class ProdController {
 		result.setData(prodResult);
 		return result;
 	}
+	
+	// 테스트용 메소드
+	@GetMapping("")
+	public ResponseVO getProd() throws Exception {
+		logger.info("call getProd()");
+		List<Prod> prodResult = prodService.findAll();
+		ResponseVO result = new ResponseVO();
+		result.setCode(HttpStatus.OK);
+		result.setMessage("SUCCESS");
+		result.setData(prodResult);
+		return result;
+	}
 }

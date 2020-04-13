@@ -89,4 +89,10 @@ public class ProdService {
 		return prodResult;
 	}
 
+	// 테스트용 메소드
+	public List<Prod> findAll() {
+		
+		return (List<Prod>) prodRepo.findAll();
+	}
+
 }
