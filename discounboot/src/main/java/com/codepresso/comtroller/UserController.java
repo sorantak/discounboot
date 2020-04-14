@@ -26,6 +26,7 @@ public class UserController {
 	@PostMapping("/signup")
 	public ResponseVO signUp(@RequestBody User user) throws Exception {
 		logger.info("call signUp()");
+		logger.info("user: " + user);
 
 		int emailResult = userService.checkEmail(user);
 		boolean ageResult = userService.checkAge(user);
