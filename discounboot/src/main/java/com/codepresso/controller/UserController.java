@@ -25,13 +25,35 @@ public class UserController {
 	private UserService userService;
 
 	@PostMapping("/signup/email")
-	public ResponseVO checkEmailButton(@RequestBody User user) throws Exception {
-		logger.info("call checkEmailButton()");
+	public ResponseVO checkEmail(@RequestBody User user) throws Exception {
+		logger.info("call checkEmail()");
 		int emailResult = userService.checkEmail(user);
 		ResponseVO result = new ResponseVO();
 		result.setCode(HttpStatus.OK);
 		result.setMessage("SUCCESS");
 		result.setData(emailResult);
+		return result;
+	}
+	
+	@PostMapping("/signup/age")
+	public ResponseVO checkAge(@RequestBody User user) throws Exception {
+		logger.info("call checkAge()");
+		boolean ageResult = userService.checkAge(user);
+		ResponseVO result = new ResponseVO();
+		result.setCode(HttpStatus.OK);
+		result.setMessage("SUCCESS");
+		result.setData(ageResult);
+		return result;
+	}
+	
+	@PostMapping("/signup/pw")
+	public ResponseVO checkPassword(@RequestBody User user) throws Exception {
+		logger.info("call checkPassword()");
+		boolean pwResult = userService.checkPw(user);
+		ResponseVO result = new ResponseVO();
+		result.setCode(HttpStatus.OK);
+		result.setMessage("SUCCESS");
+		result.setData(pwResult);
 		return result;
 	}
 	

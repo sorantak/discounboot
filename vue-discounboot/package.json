@@ -2,16 +2,21 @@
   "name": "vue-discounboot",
   "version": "0.1.0",
   "private": true,
+  "disableHostCheck": true,
   "scripts": {
+    "start": "nodemon -w webpack.config.js -x webpack-dev-server --hot",
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "build": "webpack",
+    "lint": "vue-cli-service lint",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
     "axios": "^0.19.2",
     "core-js": "^3.6.4",
     "vue": "^2.6.11",
-    "vue-router": "^3.1.6"
+    "vue-momentjs": "^0.1.2",
+    "vue-router": "^3.1.6",
+    "vuelidate": "^0.7.5"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.3.0",
