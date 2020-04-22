@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+// import Home from '../views/Home.vue'
 
 Vue.use(VueRouter)
 
@@ -8,7 +8,7 @@ Vue.use(VueRouter)
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: () => import(/* webpackChunkName: "about" */ '../views/Home.vue')
   },
   {
     path: '/signin',
@@ -28,11 +28,11 @@ Vue.use(VueRouter)
     name: 'Basket',
     component: () => import('../views/Basket.vue')
   },
-  // {
-  //   path: '/product',
-  //   name: 'Product',
-  //   component: () => import('../views/Product.vue')
-  // }
+  {
+    path: '/prod',
+    name: 'Product',
+    component: () => import('../views/Product.vue')
+  }
 ]
 
 const router = new VueRouter({

@@ -1,36 +1,93 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <p>Discounboot</p>
-      <!-- 여기서 하는 일은 거의 라우팅. -->
-      <router-link to="/">Home</router-link> |
-      <router-link to="/signup">Sign Up</router-link> |
-      <router-link to="/signin">Sign In</router-link> |
-      <router-link to="/basket">My Basket</router-link>
-    </div>
+    <!-- <div class="card">
+      <h3 class="card-header text-center">Register Area</h3>
+      <div class="card-body">
+        <form>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label>First Name</label>
+              <input type="text" class="form-control" v-model.trim="$v.firstname$model" :class="{
+                'is-invalid' :$v.firstname.$error, 'is-valid':!$v.firstname$invalid}">
+            </div>
+          </div>
+        </form>
+      </div>
+    </div> -->
+    <AppHeader></AppHeader>
     <router-view/>
   </div>
 </template>
 
+<script>
+import AppHeader from "./components/AppHeader.vue"
+import { reqired, minLength, maxLength, between } from 'vuelidate/lib/validators'
+export default {
+  components: {
+    AppHeader
+  },
+  data() {
+    return {
+      firstname: '',
+      lastname: '',
+      age: 0
+    }
+  },
+  validations: {
+    firstname: {
+      reqired,
+      minLength: minLength(3),
+      maxLength: maxLength(10)
+    },
+    lastname: {
+      reqired,
+      minLength: minLength(5),
+      maxLength: maxLength(12)
+    },
+    age: {
+      between: between(15, 40)
+    }
+  }
+}
+</script>
+
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  /* font-family: Avenir, Helvetica, Arial, sans-serif; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
 }
 
-#nav {
+AppHeader {
   padding: 30px;
 }
-/* 
-#nav a {
+
+nav {
   font-weight: bold;
   color: #2c3e50;
 }
+nav.router-link-exact-active {
+  color: #42b983;
+}
 
-#nav a.router-link-exact-active {
+body {
+  text-align: center;
+  background-color: #f6f6f6;
+}
+input {
+  border-style: groove;
+  /* width: 200px; */
+}
+button {
+  border-style: groove;
+}
+/* .shadow {
+  box-shadow: 5px 10px 10px rgba(0, 0, 0, 0.03);
+} */
+
+/* .router-link-active {
   color: #42b983;
 } */
 </style>

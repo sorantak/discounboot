@@ -1,4 +1,4 @@
-package com.codepresso.comtroller;
+package com.codepresso.controller;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.codepresso.domain.ResponseVO;
@@ -23,6 +24,17 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
+	@PostMapping("/signup/email")
+	public ResponseVO checkEmailButton(@RequestBody User user) throws Exception {
+		logger.info("call checkEmailButton()");
+		int emailResult = userService.checkEmail(user);
+		ResponseVO result = new ResponseVO();
+		result.setCode(HttpStatus.OK);
+		result.setMessage("SUCCESS");
+		result.setData(emailResult);
+		return result;
+	}
+	
 	@PostMapping("/signup")
 	public ResponseVO signUp(@RequestBody User user) throws Exception {
 		logger.info("call signUp()");
@@ -51,6 +63,7 @@ public class UserController {
 	@PostMapping("/signin")
 	public ResponseVO signIn(@RequestBody User user) throws Exception {
 		logger.info("call signIn()");
+		logger.info("user: " + user);
 
 		Token userResult = userService.signIn(user);
 		ResponseVO result = new ResponseVO();
