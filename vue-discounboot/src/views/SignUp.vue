@@ -64,7 +64,14 @@
       <!-- 중복 방지로 같은 name 설정 -->
       <input id="M" name="gender" type="radio" v-model="gender" value="M" />
       <label for="M">Male</label>
-      <input id="F" name="gender" type="radio" v-model="gender" value="F" checked/>
+      <input
+        id="F"
+        name="gender"
+        type="radio"
+        v-model="gender"
+        value="F"
+        checked
+      />
       <label for="F">Female</label>
     </div>
     <br />
@@ -77,7 +84,7 @@
 import axios from "axios";
 
 export default {
-  data: function() {
+  data() {
     return {
       email: "",
       name: "",
@@ -90,7 +97,7 @@ export default {
     };
   },
   methods: {
-    checkEmail: function() {
+    checkEmail() {
       event.preventDefault();
       var url = "http://localhost:8080/user/signup/email";
       var data = {
@@ -110,7 +117,7 @@ export default {
           alert("Email Check Failure: " + err);
         });
     },
-    checkAge: function() {
+    checkAge() {
       event.preventDefault();
       var url = "http://localhost:8080/user/signup/age";
       var data = {
@@ -132,7 +139,7 @@ export default {
           alert("Age Check Failure: " + err);
         });
     },
-    checkPassword: function() {
+    checkPassword() {
       event.preventDefault();
       var url = "http://localhost:8080/user/signup/pw";
       var data = {
@@ -152,7 +159,7 @@ export default {
           alert("Password Check Failure: " + err);
         });
     },
-    submitForm: function() {
+    submitForm() {
       var router = this.$router;
       this.checkAge();
       this.checkPassword();
@@ -171,7 +178,8 @@ export default {
         .post(url, data)
         .then(function(response) {
           console.log(response);
-          if (response.data.message == 'SUCCESS') {
+          if (response.data.message == "SUCCESS") {
+            alert("성공적으로 회원가입 되었습니다, 로그인 하세요.")
             router.push("/signin");
           }
           // this.changeView();
@@ -181,7 +189,7 @@ export default {
           alert("회원가입을 다시 시도해 주세요.");
         });
     },
-    // changeView: function() {
+    // changeView() {
     //   this.$router.push("/signin");
     // },
   },

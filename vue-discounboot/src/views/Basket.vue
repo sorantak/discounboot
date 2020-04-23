@@ -16,13 +16,13 @@
 import axios from "axios";
 
 export default {
-    data: function() {
+    data() {
         return {
             prods: []
 
         }
     },   
-    created: function() {
+    created() {
         axios
             .get('http://localhost:8080/prod')
             .then(res => { 
@@ -48,14 +48,14 @@ export default {
             }
         )
     }
-  // data: function() {
+  // data() {
   //     return {
   //         name: 'c',
   //         thumbnail: 'd'
   //     }
   // },
   // methods: {
-  //     hehe: function() {
+  //     hehe() {
   //         this.name = 'a';
   //         this.thumbnail = 'b';
   //         console.log(this.name + this.thumbnail);

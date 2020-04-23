@@ -21,32 +21,11 @@
 
 <script>
 import AppHeader from "./components/AppHeader.vue"
-import { reqired, minLength, maxLength, between } from 'vuelidate/lib/validators'
+// import { reqired, minLength, maxLength, between } from 'vuelidate/lib/validators'
+
 export default {
   components: {
     AppHeader
-  },
-  data() {
-    return {
-      firstname: '',
-      lastname: '',
-      age: 0
-    }
-  },
-  validations: {
-    firstname: {
-      reqired,
-      minLength: minLength(3),
-      maxLength: maxLength(10)
-    },
-    lastname: {
-      reqired,
-      minLength: minLength(5),
-      maxLength: maxLength(12)
-    },
-    age: {
-      between: between(15, 40)
-    }
   }
 }
 </script>
