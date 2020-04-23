@@ -13,9 +13,15 @@ https://www.eclipse.org/downloads/
 * 스프링부트 STS 설치  
 Eclipse - Help - Eclipse Marketplace - Spring Tool 3 Add-On for Spring Tools 4 3.9.12.CI  
 * MySQL 5.7 버전  
+* Visual Studio Code  
+* Vue-CLI 2.5.16 버전  
+  ```  
+  $ npm install vue  
+  ```
 
 # 특징  
-* 회원가입/ 로그인    
+* 회원가입 시 이메일 중복 확인, 가입 연령 제한, 비밀번호 확인  
+* 로그인    
 * 로그인 시 토큰 생성  
 * 배너 한 페이지에 5개씩 조회  
 * 상품 목록 한 페이지에 6개씩 조회  
