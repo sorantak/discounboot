@@ -30,6 +30,7 @@
 <script>
 // post로 서버에 데이터 전송하기 위해 axios 사용.
 import axios from "axios";
+// import VueCookie from "vue-cookie";
 
 export default {
   data() {
@@ -41,15 +42,10 @@ export default {
   },
 
   methods: {
-    //     vm.accesstoken = vm.$cookies.get('accesstoken');
-    //     console.log("accesstoken = ",vm.accesstoken);
-    //     console.log("token = ", response.data.data.token);
-    //     vm.$cookies.set('accesstoken', response.data.data.token);
-
     signIn() {
       var data = {
         email: this.email,
-        password: this.password
+        password: this.password,
       };
       var router = this.$router;
 
@@ -61,16 +57,14 @@ export default {
         .post("http://localhost:8080/user/signin", data)
         .then((res) => {
           if (res.status === 200) {
-
             this.result = res.data;
             console.log(this.result);
             this.token = this.result.data.token;
             console.log("토큰입니다: " + this.token);
 
-            document.cookie = `accesstoken=${res.data.data.token}`;
-            axios.defaults.headers.common["x-access-token"] =
-              res.data.data.token;
-            // console.log(res.headers.document.cookie);
+            this.$cookie.set("accesstoken", res.data.data.token, 1);
+
+            axios.defaults.headers.common["x-access-token"] = res.data.data.token;
             alert("Welcome!");
             router.push("/");
           }

@@ -22,7 +22,6 @@
 <script>
 import AppHeader from "./components/AppHeader.vue"
 // import { reqired, minLength, maxLength, between } from 'vuelidate/lib/validators'
-
 export default {
   components: {
     AppHeader
