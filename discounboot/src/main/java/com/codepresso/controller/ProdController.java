@@ -25,6 +25,9 @@ public class ProdController {
 
 	@Autowired
 	ProdService prodService;
+	public ProdController(ProdService prodService) {
+		this.prodService = prodService;
+	}
 
 	@GetMapping("/page")
 	public ResponseVO findSix(@CookieValue(value = "accesstoken", required = false) String accesstoken)

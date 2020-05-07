@@ -30,7 +30,7 @@ public class DiscounbootApplication implements WebMvcConfigurer{
 	    public void addCorsMappings(CorsRegistry registry) {
 	      // 모든 URI에 대해 http://localhost:18080, http://localhost:8180 도메인은 접근을 허용한다.
 	        registry.addMapping("/**")
-	                .allowedOrigins("http://localhost:8082","http://localhost:8080");
+	                .allowedOrigins("http://localhost:8081","http://localhost:8080");
 
 	    }
 	}
