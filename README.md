@@ -30,7 +30,7 @@ Eclipse - Help - Eclipse Marketplace - Spring Tool 3 Add-On for Spring Tools 4 3
 * 상품 상세보기 시 글/ 사진 형태로 노출
 
 # 스크린샷  
-![Alt text](https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fk.kakaocdn.net%2Fdn%2FbhnTC7%2FbtqCVDVa5a3%2FYDjNV0locI14U2eIU3AS5k%2Fimg.png)
+![Alt text](https://k.kakaocdn.net/dn/b7SzVx/btqEh6NXVay/fuQRatX9lcT9dYx4vbfyt0/img.png)
 
 # 사용된 기술  
 * Spring Boot  
